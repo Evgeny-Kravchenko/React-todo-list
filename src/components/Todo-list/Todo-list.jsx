@@ -8,11 +8,11 @@ import TodoListItem from '../Todo-list-item/Todo-list-item';
 const TodoList = (props) => {
   const { items } = props;
   return (
-    <ul>
+    <ul className="list-group todo-list">
       {items.map((item) => {
         const { id, ...rest } = item;
         return (
-          <li key={id}>
+          <li key={id} className="list-group-item">
             <TodoListItem item={rest} />
           </li>
         );

@@ -1,0 +1,22 @@
+.todo-list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.active {
+  font-weight: bold;
+  color: #366c98;
+}
+
+.control-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 90px;
+
+  &__item {
+    width: 40px;
+  }
+}

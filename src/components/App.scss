@@ -1,5 +1,7 @@
 .application {
-  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 500px;
   margin: 0 auto;
-  border: 1px solid black;
 }

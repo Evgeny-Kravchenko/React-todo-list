@@ -1,0 +1,13 @@
+.search-panel {
+  padding: 0.5rem;
+
+  &__input {
+    margin-right: 10px;
+  }
+}
+
+.buttons {
+  &__item {
+    border: 1px solid rgba(8, 16, 12, 0.18);
+  }
+}

@@ -1,0 +1,13 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+
+  &__title {
+    align-self: flex-start;
+  }
+
+  &__stat {
+    align-self: flex-end;
+  }
+}

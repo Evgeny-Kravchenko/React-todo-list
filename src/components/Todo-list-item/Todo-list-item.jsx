@@ -5,7 +5,23 @@ import './Todo-list-item.scss';
 
 const TodoListItem = ({ item }) => {
   const { label } = item;
-  return <span>{label}</span>;
+  const classes = [];
+  if (item.important) {
+    classes.push('active');
+  }
+  return (
+    <div className="todo-list-item">
+      <span className={classes.join(' ')}>{label}</span>
+      <div className="control-buttons">
+        <button type="button" className="btn btn-outline-danger control-buttons__item">
+          <i className="fa fa-trash-o" />
+        </button>
+        <button type="button" className="btn btn-outline-success control-buttons__item">
+          <i className="fa fa-exclamation" />
+        </button>
+      </div>
+    </div>
+  );
 };
 
 TodoListItem.propTypes = {

@@ -40,10 +40,6 @@ module.exports = (opts) => {
             },
             {
               loader: 'css-loader', // translates CSS into CommonJS
-              options: {
-                importLoaders: 1,
-                modules: true,
-              },
             },
             {
               loader: 'sass-loader', // compiles Sass to CSS
