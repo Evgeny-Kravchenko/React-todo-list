@@ -2,9 +2,9 @@ import React from 'react';
 
 import './App.scss';
 
-import AppHeader from './App-header/App-header';
-import SearchPanel from './Search-panel/Search-panel';
-import TodoList from './Todo-list/Todo-list';
+import AppHeader from './App-header';
+import SearchPanel from './Search-panel';
+import TodoList from './Todo-list';
 
 const items = [
   { label: 'Cook food', important: false, id: 1, isDone: false },

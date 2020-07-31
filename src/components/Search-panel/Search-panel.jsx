@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Search-panel.scss';
 
-import ItemStatusFilter from '../Item-status-filter/Item-status-filter';
+import ItemStatusFilter from '../Item-status-filter';
 
 const SearchPanel = () => {
   return (

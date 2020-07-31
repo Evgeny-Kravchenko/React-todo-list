@@ -2,7 +2,7 @@ import React from 'react';
 
 import './App-header.scss';
 
-import TodoStat from '../Todo-stat/Todo-stat';
+import TodoStat from '../Todo-stat';
 
 const AppHeader = () => (
   <div className="app-header">

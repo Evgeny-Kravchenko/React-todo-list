@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './Todo-list.scss';
 
-import TodoListItem from '../Todo-list-item/Todo-list-item';
+import TodoListItem from '../Todo-list-item';
 
 const TodoList = (props) => {
   const { items } = props;
