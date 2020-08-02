@@ -4,6 +4,15 @@
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
+
+  &__label {
+    cursor: pointer;
+    outline: 0;
+
+    &_done {
+      text-decoration: line-through;
+    }
+  }
 }
 
 .active {
