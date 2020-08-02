@@ -4,4 +4,15 @@
   justify-content: space-around;
   max-width: 500px;
   margin: 0 auto;
+
+  &__item-add-form {
+    padding: 10px;
+  }
+
+  &__no-todos {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: rgba(6, 5, 4, 0.51);
+  }
 }
