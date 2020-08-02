@@ -19,6 +19,8 @@ export default class App extends Component {
         this.createTodoItem('Learn React'),
         this.createTodoItem('Learn Angular'),
       ],
+      filteredItems: [],
+      isFiltered: false,
     };
     const { items } = this.state;
     this.maxId = items.length;
@@ -37,6 +39,18 @@ export default class App extends Component {
     this.setState((prevState) => {
       return {
         items: prevState.items.filter((item) => item.id !== id),
+      };
+    });
+  };
+
+  filterByText = (text) => {
+    const isFiltered = !!text.length;
+    this.setState((prevState) => {
+      return {
+        filteredItems: prevState.items.filter((item) =>
+          item.label.toLowerCase().startsWith(text.trim().toLowerCase())
+        ),
+        isFiltered,
       };
     });
   };
@@ -61,16 +75,17 @@ export default class App extends Component {
   }
 
   render() {
-    const { items: todoList } = this.state;
+    const { items: todoList, filteredItems, isFiltered } = this.state;
+    const currentItems = !isFiltered ? todoList : filteredItems;
     const doneCount = todoList.filter((item) => item.isDone).length;
     const moreToDo = todoList.length - doneCount;
     return (
       <div className="application">
         <AppHeader doneCount={doneCount} moreToDo={moreToDo} />
-        <SearchPanel />
+        <SearchPanel filterByText={this.filterByText} />
         {todoList.length !== 0 ? (
           <TodoList
-            items={todoList}
+            currentItems={currentItems}
             onDeleteItem={this.onDeleteItem}
             onToggleProperty={this.onToggleProperty}
           />
