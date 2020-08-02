@@ -17,17 +17,13 @@ export default class ItemAddForm extends Component {
     const { text } = this.state;
     if (text) {
       onAddItem(text);
-      this.clearInput();
+      this.setState({ text: '' });
     }
   };
 
   onLabelChange = (event) => {
     const { value } = event.target;
     this.setState({ text: value });
-  };
-
-  clearInput = () => {
-    this.setState({ text: '' });
   };
 
   render() {
