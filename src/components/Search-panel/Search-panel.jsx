@@ -5,7 +5,7 @@ import './Search-panel.scss';
 
 import ItemStatusFilter from '../Item-status-filter';
 
-const SearchPanel = ({ filterByText }) => {
+const SearchPanel = ({ filterByText, filterByCondition }) => {
   return (
     <div className="input-group search-panel">
       <input
@@ -16,13 +16,14 @@ const SearchPanel = ({ filterByText }) => {
           filterByText(e.target.value);
         }}
       />
-      <ItemStatusFilter />
+      <ItemStatusFilter filterByCondition={filterByCondition} />
     </div>
   );
 };
 
 SearchPanel.propTypes = {
   filterByText: PropTypes.func.isRequired,
+  filterByCondition: PropTypes.func.isRequired,
 };
 
 export default SearchPanel;

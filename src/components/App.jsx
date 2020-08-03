@@ -19,8 +19,10 @@ export default class App extends Component {
         this.createTodoItem('Learn React'),
         this.createTodoItem('Learn Angular'),
       ],
-      filteredItems: [],
-      isFiltered: false,
+      filterOptions: {
+        text: '',
+        condition: 'all',
+      },
     };
     const { items } = this.state;
     this.maxId = items.length;
@@ -43,14 +45,51 @@ export default class App extends Component {
     });
   };
 
+  getFilteredTodoList() {
+    const {
+      items: todoList,
+      filterOptions: { text, condition },
+    } = this.state;
+    return todoList.filter((item) => {
+      if (condition === 'all') {
+        if (!text.trim()) {
+          return true;
+        }
+        return item.label.toLowerCase().startsWith(text.toLowerCase().trim());
+      }
+      if (condition === 'active') {
+        if (!text.trim()) {
+          return !item.isDone;
+        }
+        return item.label.toLowerCase().startsWith(text.toLowerCase().trim()) && !item.isDone;
+      }
+      if (!text.trim()) {
+        return item.isDone;
+      }
+      return item.label.toLowerCase().startsWith(text.toLowerCase().trim()) && item.isDone;
+    });
+  }
+
+  filterByCondition = (condition) => {
+    this.setState((prevState) => {
+      return {
+        filterOptions: {
+          ...prevState.filterOptions,
+          condition,
+        },
+      };
+    });
+  };
+
   filterByText = (text) => {
     const isFiltered = !!text.length;
     this.setState((prevState) => {
       return {
-        filteredItems: prevState.items.filter((item) =>
-          item.label.toLowerCase().startsWith(text.trim().toLowerCase())
-        ),
-        isFiltered,
+        filterOptions: {
+          ...prevState.filterOptions,
+          text,
+          isFiltered,
+        },
       };
     });
   };
@@ -75,14 +114,14 @@ export default class App extends Component {
   }
 
   render() {
-    const { items: todoList, filteredItems, isFiltered } = this.state;
-    const currentItems = !isFiltered ? todoList : filteredItems;
+    const { items: todoList } = this.state;
+    const currentItems = this.getFilteredTodoList();
     const doneCount = todoList.filter((item) => item.isDone).length;
     const moreToDo = todoList.length - doneCount;
     return (
       <div className="application">
         <AppHeader doneCount={doneCount} moreToDo={moreToDo} />
-        <SearchPanel filterByText={this.filterByText} />
+        <SearchPanel filterByText={this.filterByText} filterByCondition={this.filterByCondition} />
         {todoList.length !== 0 ? (
           <TodoList
             currentItems={currentItems}
