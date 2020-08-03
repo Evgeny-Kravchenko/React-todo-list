@@ -6,10 +6,10 @@ import './Todo-list.scss';
 import TodoListItem from '../Todo-list-item';
 
 const TodoList = (props) => {
-  const { items, onDeleteItem, onToggleProperty } = props;
+  const { currentItems, onDeleteItem, onToggleProperty } = props;
   return (
     <ul className="list-group todo-list">
-      {items.map((item) => {
+      {currentItems.map((item) => {
         const { id } = item;
         return (
           <li key={id} className="list-group-item">
@@ -26,7 +26,7 @@ const TodoList = (props) => {
 };
 
 TodoList.propTypes = {
-  items: PropTypes.arrayOf(
+  currentItems: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       important: PropTypes.bool.isRequired,

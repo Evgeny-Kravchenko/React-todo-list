@@ -19,6 +19,10 @@ export default class App extends Component {
         this.createTodoItem('Learn React'),
         this.createTodoItem('Learn Angular'),
       ],
+      filterOptions: {
+        text: '',
+        condition: 'all',
+      },
     };
     const { items } = this.state;
     this.maxId = items.length;
@@ -37,6 +41,55 @@ export default class App extends Component {
     this.setState((prevState) => {
       return {
         items: prevState.items.filter((item) => item.id !== id),
+      };
+    });
+  };
+
+  getFilteredTodoList() {
+    const {
+      items: todoList,
+      filterOptions: { text, condition },
+    } = this.state;
+    return todoList.filter((item) => {
+      if (condition === 'all') {
+        if (!text.trim()) {
+          return true;
+        }
+        return item.label.toLowerCase().startsWith(text.toLowerCase().trim());
+      }
+      if (condition === 'active') {
+        if (!text.trim()) {
+          return !item.isDone;
+        }
+        return item.label.toLowerCase().startsWith(text.toLowerCase().trim()) && !item.isDone;
+      }
+      if (!text.trim()) {
+        return item.isDone;
+      }
+      return item.label.toLowerCase().startsWith(text.toLowerCase().trim()) && item.isDone;
+    });
+  }
+
+  filterByCondition = (condition) => {
+    this.setState((prevState) => {
+      return {
+        filterOptions: {
+          ...prevState.filterOptions,
+          condition,
+        },
+      };
+    });
+  };
+
+  filterByText = (text) => {
+    const isFiltered = !!text.length;
+    this.setState((prevState) => {
+      return {
+        filterOptions: {
+          ...prevState.filterOptions,
+          text,
+          isFiltered,
+        },
       };
     });
   };
@@ -62,15 +115,16 @@ export default class App extends Component {
 
   render() {
     const { items: todoList } = this.state;
+    const currentItems = this.getFilteredTodoList();
     const doneCount = todoList.filter((item) => item.isDone).length;
     const moreToDo = todoList.length - doneCount;
     return (
       <div className="application">
         <AppHeader doneCount={doneCount} moreToDo={moreToDo} />
-        <SearchPanel />
+        <SearchPanel filterByText={this.filterByText} filterByCondition={this.filterByCondition} />
         {todoList.length !== 0 ? (
           <TodoList
-            items={todoList}
+            currentItems={currentItems}
             onDeleteItem={this.onDeleteItem}
             onToggleProperty={this.onToggleProperty}
           />

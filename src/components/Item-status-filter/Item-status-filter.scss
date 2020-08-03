@@ -1,0 +1,12 @@
+.buttons__item {
+  transition: 0.2S;
+
+  &_active {
+    background-color: #17a2b8;
+    color: #ffffff;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}
